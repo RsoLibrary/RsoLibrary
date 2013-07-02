@@ -4,410 +4,410 @@ namespace Rso\StdObject;
 
 class RsoArray extends \ArrayObject implements \Countable
 {
-	protected $array;
+    protected $array;
 
     /**
-	 * Constructs the array property.
-	 * Defaults to an empty PHP array.
+     * Constructs the array property.
+     * Defaults to an empty PHP array.
      *
      * @param Array initial array
      * 
      */
-	public function __construct($array = array())
-	{
-		if (count($array) > 0 && array_keys($array) !== range(0, count($array) - 1)) {
-			throw new \Exception("Associative array passed; Arrays must be numeric");
-		}
-		$this->array = $array;
-	}
+    public function __construct($array = array())
+    {
+        if (count($array) > 0 && array_keys($array) !== range(0, count($array) - 1)) {
+            throw new \Exception("Associative array passed; Arrays must be numeric");
+        }
+        $this->array = $array;
+    }
 
     /**
-	 * Allows you to add objects to
-	 * array the standard way.
+     * Allows you to add objects to
+     * array the standard way.
      *
      * @param String array key
      * @param Object array object / value
      * 
      * @return RsoArray
      */
-	public function offsetSet($offset, $value)
-	{
-		$this->array[$offset] = $value;
-		return $this;
-	}
+    public function offsetSet($offset, $value)
+    {
+        $this->array[$offset] = $value;
+        return $this;
+    }
 
     /**
-	 * Allows you to check if key
-	 * exists the standard way.
+     * Allows you to check if key
+     * exists the standard way.
      *
      * @param String array key
      * 
      * @return Bool
      */
-	public function offsetExists($offset)
-	{
-		// RsoBool
-		return isset($this->array[$offset]);
-	}
+    public function offsetExists($offset)
+    {
+        // RsoBool
+        return isset($this->array[$offset]);
+    }
 
     /**
-	 * Allows you to unset objects in
-	 * the array the standard way.
+     * Allows you to unset objects in
+     * the array the standard way.
      *
      * @param String array key
      * 
      * @return RsoArray
      */
-	public function offsetUnset($offset)
-	{
-		unset($this->array[$offset]);
-		return $this;
-	}
+    public function offsetUnset($offset)
+    {
+        unset($this->array[$offset]);
+        return $this;
+    }
 
     /**
-	 * Allows you to get objects
-	 * from the array the standard way.
+     * Allows you to get objects
+     * from the array the standard way.
      *
      * @param String array key
      * 
      * @return Object array object / value
      */
-	public function offsetGet($offset)
-	{
-		return $this->array[$offset];
-	}
+    public function offsetGet($offset)
+    {
+        return $this->array[$offset];
+    }
 
     /**
-	 * Creates and returns an array containing
-	 * the objects in another given array.
+     * Creates and returns an array containing
+     * the objects in another given array.
      *
      * @param Array initial array
      * 
      * @return RsoArray
      */
-	public static function arrayWithArray($array = array())
-	{
-		return new RsoArray($array);
-	}
+    public static function arrayWithArray($array = array())
+    {
+        return new RsoArray($array);
+    }
 
     /**
-	 * Creates and returns an array containing
-	 * the contents of the file specified by a
-	 * given path.
+     * Creates and returns an array containing
+     * the contents of the file specified by a
+     * given path.
      *
      * @param String file path
      * 
      * @return RsoArray
      */
-	public static function arrayWithContentsOfFile($file_path)
-	{
-		return new RsoArray(json_decode(file_get_contents($file_path), true));
-	}
+    public static function arrayWithContentsOfFile($file_path)
+    {
+        return new RsoArray(json_decode(file_get_contents($file_path), true));
+    }
 
     /**
-	 * Creates and returns an array containing
-	 * the contents specified by a given URL.
+     * Creates and returns an array containing
+     * the contents specified by a given URL.
      *
      * @param String url
      * 
      * @return RsoArray
      */
-	public static function arrayWithContentsOfURL($url)
-	{
-		return new RsoArray(json_decode(file_get_contents($url), true));
-	}
+    public static function arrayWithContentsOfURL($url)
+    {
+        return new RsoArray(json_decode(file_get_contents($url), true));
+    }
 
 
     /**
-	 * Creates and returns an array containing
-	 * a given object.
+     * Creates and returns an array containing
+     * a given object.
      *
      * @param Object new array object
      * 
      * @return RsoArray
      */
-	public static function arrayWithObject($object)
-	{
-		return new RsoArray(array($object));
-	}
+    public static function arrayWithObject($object)
+    {
+        return new RsoArray(array($object));
+    }
 
     /**
-	 * Creates and returns an array containing
-	 * the objects in the argument list.
+     * Creates and returns an array containing
+     * the objects in the argument list.
      *
      * @param Object, [Object...] list of objects
      * 
      * @return RsoArray
      */
-	public static function arrayWithObjects()
-	{
-		return new RsoArray(func_get_args());
-	}
+    public static function arrayWithObjects()
+    {
+        return new RsoArray(func_get_args());
+    }
 
     /**
-	 * Creates and returns an array that includes
-	 * a given number of objects from a given
-	 * PHP array.
+     * Creates and returns an array that includes
+     * a given number of objects from a given
+     * PHP array.
      *
      * @param Object, [Object...] list of objects
      * @param Int count
      * 
      * @return RsoArray
      */
-	public static function arrayWithObjects_count()
-	{
-		$args  = func_get_args();
-		$count = end($args);
-		array_pop($args);
-		return new RsoArray(array_slice($args, 0, $count));
-	}
+    public static function arrayWithObjects_count()
+    {
+        $args  = func_get_args();
+        $count = end($args);
+        array_pop($args);
+        return new RsoArray(array_slice($args, 0, $count));
+    }
 
     /**
-	 * Returns a new array that is a copy of the
-	 * receiving array with a given object added
-	 * to the end.
+     * Returns a new array that is a copy of the
+     * receiving array with a given object added
+     * to the end.
      *
      * @param Object new array object
      * 
      * @return RsoArray
      */
-	public function arrayByAddingObject($object)
-	{
-		$array   = $this->array;
-		$array[] = $object;
-		return new RsoArray($array);
-	}
+    public function arrayByAddingObject($object)
+    {
+        $array   = $this->array;
+        $array[] = $object;
+        return new RsoArray($array);
+    }
 
     /**
-	 * Returns a new array that is a copy of the
-	 * receiving array with the objects contained
-	 * in another array added to the end.
+     * Returns a new array that is a copy of the
+     * receiving array with the objects contained
+     * in another array added to the end.
      *
      * @param Array new array
      * 
      * @return RsoArray
      */
-	public function arrayByAddingObjectsFromArray($array)
-	{
-		return new RsoArray(array_merge($this->array, $array));
-	}
+    public function arrayByAddingObjectsFromArray($array)
+    {
+        return new RsoArray(array_merge($this->array, $array));
+    }
 
     /**
-	 * Constructs and returns an NSString object
-	 * that is the result of interposing a given
-	 * separator between the elements of the array.
+     * Constructs and returns an NSString object
+     * that is the result of interposing a given
+     * separator between the elements of the array.
      *
      * @param String glue
      * 
      * @return RsoArray
      */
-	public function componentsJoinedByString($string)
-	{
-		// RsoString
-		return (implode($string, $this->array));
-	}
+    public function componentsJoinedByString($string)
+    {
+        // RsoString
+        return (implode($string, $this->array));
+    }
 
     /**
-	 * Returns a Boolean value that indicates whether
-	 * a given object is present in the array.
+     * Returns a Boolean value that indicates whether
+     * a given object is present in the array.
      *
      * @param Object object to find
      * 
      * @return Bool
      */
-	public function containsObject($object)
-	{
-		// RsoBool
-		return in_array($object, $this->array);
-	}
+    public function containsObject($object)
+    {
+        // RsoBool
+        return in_array($object, $this->array);
+    }
 
     /**
-	 * Returns the number of objects currently in
-	 * the array.
+     * Returns the number of objects currently in
+     * the array.
      *
      * @return RsoNumber
      */
-	public function count()
-	{
-		// RsoNumber
-		return count($this->array);
-	}
+    public function count()
+    {
+        // RsoNumber
+        return count($this->array);
+    }
 
     /**
-	 * Returns a string that represents the contents
-	 * of the array, formatted as a property list.
+     * Returns a string that represents the contents
+     * of the array, formatted as a property list.
      * 
      * @return String array description
      */
-	public function description()
-	{
-		// RsoString
-		return print_r($this->array, true);
-	}
+    public function description()
+    {
+        // RsoString
+        return print_r($this->array, true);
+    }
 
     /**
-	 * Executes a given block using each object in the
-	 * array, starting with the first object and
-	 * continuing through the array to the last object.
+     * Executes a given block using each object in the
+     * array, starting with the first object and
+     * continuing through the array to the last object.
      *
      * @param Closure code block
      */
-	public function enumerateObjectsUsingBlock(\Closure $block)
-	{
-		foreach ($this->array as $key => $value) {
-			$block($value, $key);
-		}
-	}
+    public function enumerateObjectsUsingBlock(\Closure $block)
+    {
+        foreach ($this->array as $key => $value) {
+            $block($value, $key);
+        }
+    }
 
     /**
-	 * Returns the first object contained in the
-	 * receiving array that’s equal to an object
-	 * in another given array.
+     * Returns the first object contained in the
+     * receiving array that’s equal to an object
+     * in another given array.
      *
      * @param Array array to compare
-	 *
-	 * @return Object array object / value
+     *
+     * @return Object array object / value
      */
-	public function firstObjectCommonWithArray($array)
-	{
-		return current(array_intersect($this->array, $array));
-	}
+    public function firstObjectCommonWithArray($array)
+    {
+        return current(array_intersect($this->array, $array));
+    }
 
     /**
-	 * Returns the lowest index whose corresponding
-	 * array value is equal to a given object.
+     * Returns the lowest index whose corresponding
+     * array value is equal to a given object.
      *
      * @param Object object to find
-	 *
-	 * @return Int index of object
+     *
+     * @return Int index of object
      */
-	public function indexOfObject($object)
-	{
-		// RsoNumber
-		return array_search($object, $this->array);
-	}
+    public function indexOfObject($object)
+    {
+        // RsoNumber
+        return array_search($object, $this->array);
+    }
 
     /**
-	 * Initializes a newly allocated array by placing
-	 * in it the objects contained in a given array.
+     * Initializes a newly allocated array by placing
+     * in it the objects contained in a given array.
      *
      * @param Array initial array
-	 *
-	 * @return RsoArray
+     *
+     * @return RsoArray
      */
-	public function initWithArray($array)
-	{
-		$this->array = $array;
-		return $this;
-	}
+    public function initWithArray($array)
+    {
+        $this->array = $array;
+        return $this;
+    }
 
     /**
-	 * Initializes a newly allocated array with the
-	 * contents of the file specified by a given path.
+     * Initializes a newly allocated array with the
+     * contents of the file specified by a given path.
      *
      * @param String file path
-	 *
-	 * @return RsoArray
+     *
+     * @return RsoArray
      */
-	public function initWithContentsOfFile($file_path)
-	{
-		$this->array = json_decode(file_get_contents($file_path), true);
-		return $this;
-	}
+    public function initWithContentsOfFile($file_path)
+    {
+        $this->array = json_decode(file_get_contents($file_path), true);
+        return $this;
+    }
 
     /**
-	 * Initializes a newly allocated array with the
-	 * contents of the location specified by a given URL.
+     * Initializes a newly allocated array with the
+     * contents of the location specified by a given URL.
      *
      * @param String url
-	 *
-	 * @return RsoArray
+     *
+     * @return RsoArray
      */
-	public function initWithContentsOfURL($url)
-	{
-		$this->array = json_decode(file_get_contents($url), true);
-		return $this;
-	}
+    public function initWithContentsOfURL($url)
+    {
+        $this->array = json_decode(file_get_contents($url), true);
+        return $this;
+    }
 
     /**
-	 * Initializes a newly allocated array by placing
-	 * in it the objects in the argument list.
+     * Initializes a newly allocated array by placing
+     * in it the objects in the argument list.
      *
      * @param Object [Object...] list of objects
-	 *
-	 * @return RsoArray
+     *
+     * @return RsoArray
      */
-	public function initWithObjects()
-	{
-		$this->array = func_get_args();
-		return $this;
-	}
+    public function initWithObjects()
+    {
+        $this->array = func_get_args();
+        return $this;
+    }
 
     /**
-	 * Initializes a newly allocated array to include
-	 * a given number of objects from a given PHP array.
+     * Initializes a newly allocated array to include
+     * a given number of objects from a given PHP array.
      *
      * @param Object [Object...] list of objects
      * @param Int count
-	 *
-	 * @return RsoArray
+     *
+     * @return RsoArray
      */
-	public function initWithObjects_count()
-	{
-		$args  = func_get_args();
-		$count = end($args);
-		array_pop($args);
-		$this->array = array_slice($args, 0, $count);
-		return $this;
-	}
+    public function initWithObjects_count()
+    {
+        $args  = func_get_args();
+        $count = end($args);
+        array_pop($args);
+        $this->array = array_slice($args, 0, $count);
+        return $this;
+    }
 
     /**
-	 * Compares the receiving array to another array.
+     * Compares the receiving array to another array.
      *
      * @param Array array to compare
-	 *
-	 * @return Bool
+     *
+     * @return Bool
      */
-	public function isEqualToArray($array)
-	{
-		// RsoBool
-		return ($this->array === $array) ? true : false;
-	}
+    public function isEqualToArray($array)
+    {
+        // RsoBool
+        return ($this->array === $array) ? true : false;
+    }
 
     /**
-	 * Returns the object in the array with the
-	 * highest index value.
-	 *
-	 * @return Object array object / value
+     * Returns the object in the array with the
+     * highest index value.
+     *
+     * @return Object array object / value
      */
-	public function lastObject()
-	{
-		return end($this->array);
-	}
+    public function lastObject()
+    {
+        return end($this->array);
+    }
 
     /**
-	 * Returns the object located at index.
+     * Returns the object located at index.
      *
      * @param Int array index
-	 *
-	 * @return Object array object / value
+     *
+     * @return Object array object / value
      */
-	public function objectAtIndex($index)
-	{
-		return $this->array[$index];
-	}
+    public function objectAtIndex($index)
+    {
+        return $this->array[$index];
+    }
 
     /**
-	 * Returns an array containing the results
-	 * of invoking valueForKey: using key on each
-	 * of the array's objects.
+     * Returns an array containing the results
+     * of invoking valueForKey: using key on each
+     * of the array's objects.
      *
      * @param Int array key
-	 *
-	 * @return Object array object / value
+     *
+     * @return Object array object / value
      */
-	public function valueForKey($key)
-	{
-		return $this->array[$key];
-	}
+    public function valueForKey($key)
+    {
+        return $this->array[$key];
+    }
 }
