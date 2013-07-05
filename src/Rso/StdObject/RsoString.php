@@ -34,9 +34,6 @@ namespace Rso\StdObject;
 
 class RsoString
 {
-    /**
-     * @var String the initial string
-     */
     protected $string;
 
     /**
