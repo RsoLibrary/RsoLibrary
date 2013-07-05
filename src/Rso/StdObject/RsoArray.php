@@ -52,18 +52,12 @@ class RsoArray extends \ArrayObject implements \Countable
     }
 
     /**
-     * Allows you to add objects to
-     * array the standard way.
-     *
-     * @param String array key
-     * @param Object array object / value
-     * 
-     * @return RsoArray
+     * Cannot assign objects to an immutable
+     * array. An exception will be thrown.
      */
     public function offsetSet($offset, $value)
     {
-        $this->array[$offset] = $value;
-        return $this;
+        throw new \Exception("Unable to assign object to an immutable array");
     }
 
     /**

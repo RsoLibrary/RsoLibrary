@@ -32,7 +32,7 @@
 
 namespace Rso\StdObject;
 
-class RsoMutableArray extends RsoArray
+class RsoMutableArray extends RsoArray implements \ArrayAccess
 {
     /**
      * Constructs the array property.
@@ -44,6 +44,62 @@ class RsoMutableArray extends RsoArray
     public function __construct($array = array())
     {
         $this->array = $array;
+    }
+
+    /**
+     * Allows you to add objects to
+     * array the standard way.
+     *
+     * @param String array key
+     * @param Object array object / value
+     * 
+     * @return RsoArray
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->array[$offset] = $value;
+        return $this;
+    }
+
+    /**
+     * Allows you to check if key
+     * exists the standard way.
+     *
+     * @param String array key
+     * 
+     * @return Bool
+     */
+    public function offsetExists($offset)
+    {
+        // RsoBool
+        return isset($this->array[$offset]);
+    }
+
+    /**
+     * Allows you to unset objects in
+     * the array the standard way.
+     *
+     * @param String array key
+     * 
+     * @return RsoArray
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->array[$offset]);
+        return $this;
+    }
+
+    /**
+     * Allows you to get objects
+     * from the array the standard way.
+     *
+     * @param String array key
+     * 
+     * @return Object array object / value
+     */
+    public function offsetGet($offset)
+    {
+        return $this->array[$offset];
     }
 
     /**
@@ -74,6 +130,7 @@ class RsoMutableArray extends RsoArray
         $this->array = array_merge($this->array, $objects);
         return $this;
     }
+
 
     /**
      * Exchanges the objects in the array at given
