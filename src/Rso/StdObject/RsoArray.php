@@ -3,7 +3,7 @@
 /**
  * @author Harry Lawrence
  * @copyright Hazbo 2013
- * @package RsoMutableArray
+ * @package RsoArray
  * @version 0.1
  * @license The MIT License (MIT)
  *
