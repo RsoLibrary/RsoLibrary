@@ -217,18 +217,17 @@ class RsoArray extends \ArrayObject implements \Countable
     }
 
     /**
-     * Constructs and returns an NSString object
+     * Constructs and returns an RsoString object
      * that is the result of interposing a given
      * separator between the elements of the array.
      *
      * @param String glue
      * 
-     * @return RsoArray
+     * @return RsoString
      */
     public function componentsJoinedByString($string)
     {
-        // RsoString
-        return (implode($string, $this->array));
+        return new RsoString((implode($string, $this->array)));
     }
 
     /**
@@ -261,12 +260,11 @@ class RsoArray extends \ArrayObject implements \Countable
      * Returns a string that represents the contents
      * of the array, formatted as a property list.
      * 
-     * @return String array description
+     * @return RsoString array description
      */
     public function description()
     {
-        // RsoString
-        return print_r($this->array, true);
+        return new RsoString(print_r($this->array, true));
     }
 
     /**
