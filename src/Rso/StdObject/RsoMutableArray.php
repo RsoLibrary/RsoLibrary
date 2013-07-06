@@ -39,11 +39,10 @@ class RsoMutableArray extends RsoArray implements \ArrayAccess
      * Defaults to an empty PHP array.
      *
      * @param Array initial array
-     * 
      */
     public function __construct($array = array())
     {
-        $this->array = $array;
+        parent::__construct($array);
     }
 
     /**

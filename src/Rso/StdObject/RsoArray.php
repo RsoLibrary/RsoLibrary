@@ -45,7 +45,7 @@ class RsoArray extends \ArrayObject implements \Countable
      */
     public function __construct($array = array())
     {
-        if (count($array) > 0 && array_keys($array) !== range(0, count($array) - 1)) {
+        if (is_array($array) && (bool)count(array_filter(array_keys($array), 'is_string'))) {
             throw new \Exception("Associative array passed; Arrays must be numeric");
         }
         $this->array = $array;
