@@ -32,7 +32,7 @@
 
 namespace Rso\StdObject;
 
-class RsoMutableDictionary
+class RsoMutableDictionary extends RsoDictionary
 {
 	protected $dictionary;
 
