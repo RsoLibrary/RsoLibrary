@@ -32,7 +32,7 @@
 
 namespace Rso\StdObject;
 
-class RsoDictionary
+class RsoDictionary implements \Countable
 {
 	protected $dictionary;
 
@@ -42,4 +42,51 @@ class RsoDictionary
 			// error
 		}
 	}
+
+	public static function dictionaryWithContentsOfFile($file_path)
+	{
+		return new RsoDictionary(json_decode(file_get_contents($file_path), true));
+	}
+
+	public static function dictionaryWithContentsOfURL($url)
+	{
+		return new RsoDictionary(json_decode(file_get_contents($url), true));
+	}
+
+	public static function dictionaryWithDictionary(RsoDictionary $dictionary)
+	{
+		return new RsoDictionary($dictionary);
+	}
+
+	public static function dictionaryWithObject_forKey($object, $key)
+	{
+		return new RsoDictionary(array($key => $object));
+	}
+
+	public static function dictionaryWithObjects_forKeys($objects, $keys)
+	{
+		return new RsoDictionary(array_combine($keys, $objects));
+	}
+
+	public function allKeys()
+	{
+		return new RsoArray(array_keys($this->dictionary));
+	}
+
+	public function allKeysForObject()
+	{
+
+	}
+
+	public function allValues()
+	{
+		return new RsoArray(array_values($this->dictionary));
+	}
+
+	public function count()
+	{
+		// RsoNumber
+		return count($this->dictionary);
+	}
 }
+
