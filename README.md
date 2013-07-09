@@ -30,7 +30,7 @@ You can install the Rso Libraries using composer
 
 ## Simple Usage
 #### RsoArray Example
-	```php
+```php
 	<?php
 
 	require('vendor/autoload.php');
