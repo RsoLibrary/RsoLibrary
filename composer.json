@@ -1,0 +1,12 @@
+{
+    "name": "rso/lib",
+    "type": "library",
+    "description": "Rso Library",
+    "keywords": ["Rso","RsoLibrary","Library", "Hazbo"],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": { "Rso\\StdObject": "src" }
+    }
+}
