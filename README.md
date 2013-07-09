@@ -1,11 +1,23 @@
 # Rso Library
 
-Rso Library is an Objective-C inspired set of classes that helps everything in PHP become and object.
+Rso Library is as set of classes written in PHP that allow you to use common data types as objects.
 
-## Progress
+## Current Implementations
 
-Currently the only fully working class is the `RsoArray`.
+`RsoArray`
+
+`RsoDictionary`
+
+`RsoMutableArray`
+
+`RsoMutableDictionary`
+
+`RsoNull`
+
+`RsoNumber`
+
+`RsoString`
 
 ## Documentation
 
-Coming soon.
+Coming Soon!
