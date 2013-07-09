@@ -69,8 +69,10 @@ However to set objects using this method you will need to create a mutable array
 
 	use Rso\Stdobject\RsoMutableArray;
 
+	// Create a new mutable array
 	$array = new RsoMutableArray();
 
+	// Assign a value to index 0
 	$array[0] = 'Zero';
 
 	echo $array[0];
