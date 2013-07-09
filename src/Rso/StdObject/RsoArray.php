@@ -41,7 +41,6 @@ class RsoArray extends \ArrayObject implements \Countable
      * Defaults to an empty PHP array.
      *
      * @param Array initial array
-     * 
      */
     public function __construct($array = array())
     {

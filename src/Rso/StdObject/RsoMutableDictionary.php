@@ -36,8 +36,114 @@ class RsoMutableDictionary extends RsoDictionary
 {
 	protected $dictionary;
 
+    /**
+     * Constructs the dictionary property.
+     * Defaults to an empty PHP array.
+     *
+     * @param Array initial array
+     */
 	public function __construct($dictionary = array())
 	{
 		parent::__construct($dictionary);
+	}
+
+	/**
+	 * Adds to the receiving dictionary the
+	 * entries from another dictionary.
+	 *
+	 * @param Array new dictionary
+	 *
+	 * @return RsoDictionary
+	 */
+	public function addEntriesFromDictionary($dictionary = array())
+	{
+		$this->dictionary = array_merge($this->dictionary, $dictionary);
+		return $this;
+	}
+
+	/**
+	 * Each key and corresponding value object
+	 * is unset.
+	 *
+	 * @return RsoDictionary
+	 */
+	public function removeAllObjects()
+	{
+		$this->dictionary = array();
+		return $this;
+	}
+
+	/**
+	 * Each key and corresponding value object
+	 * is unset.
+	 * 
+	 * @param String object key
+	 *
+	 * @return RsoDictionary
+	 */
+	public function removeObjectForKey($key)
+	{
+		unset($this->dictionary[$key]);
+		return $this;
+	}
+
+	/**
+	 * Removes from the dictionary entries
+	 * specified by elements in a given array.
+	 * 
+	 * @param Array object keys
+	 *
+	 * @return RsoDictionary
+	 */
+	public function removeObjectsForKeys($keys)
+	{
+		foreach ($keys as $key) {
+			unset($this->dictionary[$key]);
+		}
+		return $this;
+	}
+
+	/**
+	 * Removes from the dictionary entries
+	 * specified by elements in a given array.
+	 * 
+	 * @param Array new dictionary
+	 *
+	 * @return RsoDictionary
+	 */
+	public function setDictionary($dictionary = array())
+	{
+		$this->dictionary = $dictionary;
+		return $this;
+	}
+
+	/**
+	 * Adds a given key-value pair to the
+	 * dictionary.
+	 * 
+	 * @param Object key value
+	 * @param String object key
+	 *
+	 * @return RsoDictionary
+	 */
+	public function setObject_forKey($object, $key)
+	{
+		$this->dictionary[$key] = $object;
+		return $this;
+	}
+
+	/**
+	 * Adds a given key-value pair to the
+	 * dictionary.
+	 * 
+	 * @param Object key value
+	 * @param String object key
+	 *
+	 * @return RsoDictionary
+	 */
+	public function setValue_forKey($value, $key)
+	{
+		$this->dictionary[$key] = $value;
+		return $this;
 	}
 }

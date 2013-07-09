@@ -42,7 +42,6 @@ class RsoDictionary implements \Countable
      * Defaults to an empty PHP array.
      *
      * @param Array initial dictionary
-     * 
      */
     public function __construct($dictionary = array())
     {
