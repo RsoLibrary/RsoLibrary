@@ -165,7 +165,7 @@ class RsoDictionary implements \Countable
      */
     public function description()
     {
-        return new RsoString(print_r($this->dictionary, true));
+        return new RsoString(str_replace("Array\n", "RsoDictionary\n", print_r($this->dictionary, true)));
     }
 
     /**
