@@ -36,7 +36,6 @@ class RsoDictionary implements \Countable
 {
     protected $dictionary;
 
-
     /**
      * Constructs the dictionary property.
      * Defaults to an empty PHP array.
