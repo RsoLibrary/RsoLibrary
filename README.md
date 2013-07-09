@@ -31,30 +31,31 @@ You can install the Rso Libraries using composer
 ## Simple Usage
 #### RsoArray Example
 ```php
-	<?php
+<?php
 
-	require('vendor/autoload.php');
+require('vendor/autoload.php');
 
-	use Rso\Stdobject\RsoArray;
+use Rso\Stdobject\RsoArray;
 
-	// Create a new instance of RsoArray
-	$array_one = new RsoArray();
+// Create a new instance of RsoArray
+$array_one = new RsoArray();
 
-	// Or create one staticly
-	$array_two = RsoArray::arrayWithObjects('object 1', 'object 2', 'object 3');
+// Or create one staticly
+$array_two = RsoArray::arrayWithObjects('object 1', 'object 2', 'object 3');
 
-	// Count array elements
-	echo $array_two->count();
+// Count array elements
+echo $array_two->count();
 
-	// Search through arrays
-	if ($array_two->containsObject('object 3')) {
-		echo 'Object was found!';
-	}
+// Search through arrays
+if ($array_two->containsObject('object 3')) {
+	echo 'Object was found!';
+}
 
-	// Enumerate through arrays using the keys and values
-	$array_two->enumerateObjectsUsingBlock(function($value, $key) {
-		echo $value . "<br />";
-	});
+// Enumerate through arrays using the keys and values
+$array_two->enumerateObjectsUsingBlock(function($value, $key) {
+	echo $value . "<br />";
+});
+```
 
 Above is just a very small example of how the RsoArray class can be used. Array objects can
 also be accessed the usual way:
