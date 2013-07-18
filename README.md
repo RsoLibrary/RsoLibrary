@@ -21,12 +21,13 @@ Rso Library is as set of classes written in PHP that allow you to use common dat
 ## Install
 
 You can install the Rso Libraries using composer
-
-	{
-		"require" : {
-			"rso/lib" : "dev-master"
-		}
+```json
+{
+	"require" : {
+		"rso/lib" : "dev-master"
 	}
+}
+```
 
 ## Simple Usage
 #### RsoArray Example
@@ -63,20 +64,21 @@ also be accessed the usual way:
 	echo $array_two[0];
 
 However to set objects using this method you will need to create a mutable array.
+```php
+<?php
 
-	<?php
+require('vendor/autoload.php');
 
-	require('vendor/autoload.php');
+use Rso\Stdobject\RsoMutableArray;
 
-	use Rso\Stdobject\RsoMutableArray;
+// Create a new mutable array
+$array = new RsoMutableArray();
 
-	// Create a new mutable array
-	$array = new RsoMutableArray();
+// Assign a value to index 0
+$array[0] = 'Zero';
 
-	// Assign a value to index 0
-	$array[0] = 'Zero';
-
-	echo $array[0];
+echo $array[0];
+```
 
 ## Documentation
 
