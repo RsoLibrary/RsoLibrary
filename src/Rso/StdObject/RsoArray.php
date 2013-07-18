@@ -32,6 +32,10 @@
 
 namespace Rso\StdObject;
 
+use
+    SplFixedArray,
+    Exception;
+
 class RsoArray extends \ArrayObject implements \Countable
 {
     protected $array;
@@ -41,16 +45,15 @@ class RsoArray extends \ArrayObject implements \Countable
      * Defaults to an empty PHP array.
      *
      * @param Array initial array
-     * 
      */
-    public function __construct($array = array(), $with_count = null)
+    public function __construct($array = array(), $fixed = true)
     {
         if (is_array($array) && (bool)count(array_filter(array_keys($array), 'is_string'))) {
-            throw new \Exception("Associative array passed; Arrays must be numeric");
+            throw new Exception("Associative array passed; Arrays must be numeric");
         }
         $this->array = $array;
-        if (!is_null($with_count)) {
-            $this->array = new \SplFixedArray($with_count);
+        if ($fixed) {
+            $this->array = new SplFixedArray(count($array));
             foreach ($array as $key => $value) {
                 $this->array[$key] = $value;
             }
@@ -63,7 +66,7 @@ class RsoArray extends \ArrayObject implements \Countable
      */
     public function offsetSet($offset, $value)
     {
-        throw new \Exception("Unable to assign object to an immutable array");
+        throw new Exception("Unable to assign object to an immutable array");
     }
 
     /**

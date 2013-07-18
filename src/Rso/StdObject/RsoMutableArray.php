@@ -42,7 +42,7 @@ class RsoMutableArray extends RsoArray implements \ArrayAccess
      */
     public function __construct($array = array())
     {
-        parent::__construct($array);
+        parent::__construct($array, false);
     }
 
     /**

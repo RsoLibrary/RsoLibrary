@@ -41,7 +41,6 @@ class RsoString
      * Defaults to an empty PHP string.
      *
      * @param String initial string
-     * 
      */
     public function __construct($string = "")
     {
