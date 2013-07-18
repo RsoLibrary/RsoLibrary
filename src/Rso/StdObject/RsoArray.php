@@ -34,9 +34,12 @@ namespace Rso\StdObject;
 
 use
     SplFixedArray,
+    ArrayObject,
+    Countable,
+    Closure,
     Exception;
 
-class RsoArray extends \ArrayObject implements \Countable
+class RsoArray extends ArrayObject implements Countable
 {
     protected $array;
 
@@ -283,7 +286,7 @@ class RsoArray extends \ArrayObject implements \Countable
      *
      * @param Closure code block
      */
-    public function enumerateObjectsUsingBlock(\Closure $block)
+    public function enumerateObjectsUsingBlock(Closure $block)
     {
         foreach ($this->array as $key => $value) {
             $block($value, $key);

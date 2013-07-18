@@ -32,7 +32,7 @@
 
 namespace Rso\StdObject;
 
-class RsoDictionary extends \SplHeap implements \Countable
+class RsoDictionary implements \Countable
 {
     protected $dictionary;
 
@@ -47,11 +47,6 @@ class RsoDictionary extends \SplHeap implements \Countable
         if (is_array($dictionary) && !empty($dictionary) && !(bool)count(array_filter(array_keys($dictionary), 'is_string'))) {
             throw new \Exception("Numeric array passed; Dictionaries must be associative");
         }
-    }
-
-    public function compare($dictionary)
-    {
-        return (array_values($this->dictionary) === array_values($dictionary)) ? true : false;
     }
 
     /**
