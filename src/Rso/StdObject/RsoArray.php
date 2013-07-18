@@ -43,12 +43,18 @@ class RsoArray extends \ArrayObject implements \Countable
      * @param Array initial array
      * 
      */
-    public function __construct($array = array())
+    public function __construct($array = array(), $with_count = null)
     {
         if (is_array($array) && (bool)count(array_filter(array_keys($array), 'is_string'))) {
             throw new \Exception("Associative array passed; Arrays must be numeric");
         }
         $this->array = $array;
+        if (!is_null($with_count)) {
+            $this->array = new \SplFixedArray($with_count);
+            foreach ($array as $key => $value) {
+                $this->array[$key] = $value;
+            }
+        }
     }
 
     /**
