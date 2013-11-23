@@ -39,6 +39,12 @@ class RsoArray extends \ArrayObject implements \Countable
     private function convertArgObjects()
     {
         $args = func_get_args();
+        if (isset($args[0][0]) && is_array($args[0][0])) {
+            $last_element = end($args[0][0]);
+            if ($last_element == 'rso-non-fixed') {
+                return $args[0][0];
+            }
+        }
         return $args[0];
     }
 
@@ -56,8 +62,10 @@ class RsoArray extends \ArrayObject implements \Countable
         if (is_array($array) && (bool)count(array_filter(array_keys($array), 'is_string'))) {
             throw new \Exception("Associative array passed; Arrays must be numeric");
         }
-        $this->array = $array;
-        if ($fixed != 'rso-non-fixed') {
+        if ($fixed == 'rso-non-fixed') {
+            array_pop($array);
+            $this->array = $array;
+        } else {
             $this->array = new \SplFixedArray(count($array));
             foreach ($array as $key => $value) {
                 $this->array[$key] = $value;

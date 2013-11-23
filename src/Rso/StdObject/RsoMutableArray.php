@@ -40,9 +40,12 @@ class RsoMutableArray extends RsoArray implements \ArrayAccess
      *
      * @param Array initial array
      */
-    public function __construct($array = array())
+    public function __construct()
     {
-        parent::__construct($array, false);
+        $args   = func_get_args();
+        $args[] = 'rso-non-fixed';
+
+        parent::__construct($args);
     }
 
     /**
