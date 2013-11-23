@@ -32,14 +32,7 @@
 
 namespace Rso\StdObject;
 
-use
-    SplFixedArray,
-    ArrayObject,
-    Countable,
-    Closure,
-    Exception;
-
-class RsoArray extends ArrayObject implements Countable
+class RsoArray extends \ArrayObject implements \Countable
 {
     protected $array;
 
@@ -61,11 +54,11 @@ class RsoArray extends ArrayObject implements Countable
         $fixed = end($array);
 
         if (is_array($array) && (bool)count(array_filter(array_keys($array), 'is_string'))) {
-            throw new Exception("Associative array passed; Arrays must be numeric");
+            throw new \Exception("Associative array passed; Arrays must be numeric");
         }
         $this->array = $array;
         if ($fixed != 'rso-non-fixed') {
-            $this->array = new SplFixedArray(count($array));
+            $this->array = new \SplFixedArray(count($array));
             foreach ($array as $key => $value) {
                 $this->array[$key] = $value;
             }
@@ -78,7 +71,7 @@ class RsoArray extends ArrayObject implements Countable
      */
     public function offsetSet($offset, $value)
     {
-        throw new Exception("Unable to assign object to an immutable array");
+        throw new \Exception("Unable to assign object to an immutable array");
     }
 
     /**
@@ -295,7 +288,7 @@ class RsoArray extends ArrayObject implements Countable
      *
      * @param Closure code block
      */
-    public function enumerateObjectsUsingBlock(Closure $block)
+    public function enumerateObjectsUsingBlock(\Closure $block)
     {
         foreach ($this->array as $key => $value) {
             $block($value, $key);
