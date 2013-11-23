@@ -59,7 +59,14 @@ class RsoMutableArray extends RsoArray implements \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        $this->array[$offset] = $value;
+        if (!is_int($offset)) {
+            throw new \Exception("Array keys must be numeric; string passed");
+        }
+        if (!isset($this->array[$offset])) {
+            $this->array[] = $value;
+        } else {
+            $this->array[$offset] = $value;
+        }
         return $this;
     }
 
