@@ -43,19 +43,28 @@ class RsoArray extends ArrayObject implements Countable
 {
     protected $array;
 
+    private function convertArgObjects()
+    {
+        $args = func_get_args();
+        return $args[0];
+    }
+
     /**
      * Constructs the array property.
      * Defaults to an empty PHP array.
      *
      * @param Array initial array
      */
-    public function __construct($array = array(), $fixed = true)
+    public function __construct()
     {
+        $array = $this->convertArgObjects(func_get_args());
+        $fixed = end($array);
+
         if (is_array($array) && (bool)count(array_filter(array_keys($array), 'is_string'))) {
             throw new Exception("Associative array passed; Arrays must be numeric");
         }
         $this->array = $array;
-        if ($fixed) {
+        if ($fixed != 'rso-non-fixed') {
             $this->array = new SplFixedArray(count($array));
             foreach ($array as $key => $value) {
                 $this->array[$key] = $value;
