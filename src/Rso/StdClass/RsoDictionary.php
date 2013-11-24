@@ -30,7 +30,7 @@
  * THE SOFTWARE.
  */
 
-namespace Rso\StdObject;
+namespace Rso\StdClass;
 
 class RsoDictionary implements \Countable
 {

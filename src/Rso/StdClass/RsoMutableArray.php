@@ -30,7 +30,7 @@
  * THE SOFTWARE.
  */
 
-namespace Rso\StdObject;
+namespace Rso\StdClass;
 
 class RsoMutableArray extends RsoArray implements \ArrayAccess
 {
