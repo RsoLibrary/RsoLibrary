@@ -112,6 +112,17 @@ class RsoMutableArray extends RsoArray implements \ArrayAccess
     }
 
     /**
+     * Returns a string that represents the contents
+     * of the array, formatted as a property list.
+     * 
+     * @return RsoString array description
+     */
+    public function description()
+    {
+        return new RsoString(str_replace("Array\n(", "Rso\StdClass\RsoMutableArray\n(", print_r($this->array, true)));
+    }
+
+    /**
      * Inserts a given object at the end
      * of the array.
      *

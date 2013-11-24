@@ -286,7 +286,7 @@ class RsoArray extends \ArrayObject implements \Countable
      */
     public function description()
     {
-        return new RsoString(str_replace("Array\n(", "RsoArray\n(", print_r($this->array, true)));
+        return new RsoString(str_replace("Array\n(", "Rso\StdClass\RsoArray\n(", print_r($this->array, true)));
     }
 
     /**
