@@ -3,7 +3,7 @@
 /**
  * @author Harry Lawrence
  * @copyright Hazbo 2013
- * @package RsoNumber
+ * @package RsoFixedArray
  * @version 0.1
  * @license The MIT License (MIT)
  *
@@ -32,12 +32,7 @@
 
 namespace Rso\StdClass;
 
-class RsoNumber
+class RsoFixedArray extends \SplFixedArray
 {
-	protected $number;
 
-	public function __construct($number = 0)
-	{
-		$this->number = $number;
-	}
 }

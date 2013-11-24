@@ -66,7 +66,7 @@ class RsoArray extends \ArrayObject implements \Countable
             array_pop($array);
             $this->array = $array;
         } else {
-            $this->array = new \SplFixedArray(count($array));
+            $this->array = new RsoFixedArray(count($array));
             foreach ($array as $key => $value) {
                 $this->array[$key] = $value;
             }
