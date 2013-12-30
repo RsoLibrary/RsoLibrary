@@ -48,6 +48,15 @@ class RsoArray extends \ArrayObject implements \Countable
         return $args[0];
     }
 
+    private function createFixedArrayWithCount($count = 0)
+    {
+        $array       = $this->array;
+        $this->array = new RsoFixedArray($count);
+        foreach ($array as $key => $value) {
+            $this->array[$key] = $value;
+        }
+    }
+
     /**
      * Constructs the array property.
      * Defaults to an empty PHP array.
@@ -62,14 +71,11 @@ class RsoArray extends \ArrayObject implements \Countable
         if (is_array($array) && (bool)count(array_filter(array_keys($array), 'is_string'))) {
             throw new \Exception("Associative array passed; Arrays must be numeric");
         }
+        $this->array = $array;
         if ($fixed == 'rso-non-fixed') {
-            array_pop($array);
-            $this->array = $array;
+            array_pop($this->array);
         } else {
-            $this->array = new RsoFixedArray(count($array));
-            foreach ($array as $key => $value) {
-                $this->array[$key] = $value;
-            }
+            $this->createFixedArrayWithCount(count($array));
         }
     }
 
@@ -267,13 +273,25 @@ class RsoArray extends \ArrayObject implements \Countable
     }
 
     /**
-     * Returns the number of objects currently in
-     * the array.
+     * Initializes a newly allocated array to include
+     * a given number of objects from a given PHP array
+     * or retuns the corrent count of objects in array.
      *
-     * @return RsoNumber
+     * @param Int / Null count
+     *
+     * @return RsoArray / RsoNumber
      */
-    public function count()
+    public function count($count = null)
     {
+        if (!is_null($count)) {
+            $array = $this->array;
+            if (is_object($array)) {
+                $array = $this->array[0];
+            }
+            $this->array = array_slice($array, 0, $count);
+            $this->createFixedArrayWithCount($count);
+            return $this;
+        }
         // RsoNumber
         return count($this->array);
     }
@@ -384,24 +402,6 @@ class RsoArray extends \ArrayObject implements \Countable
     public function initWithObjects()
     {
         $this->array = func_get_args();
-        return $this;
-    }
-
-    /**
-     * Initializes a newly allocated array to include
-     * a given number of objects from a given PHP array.
-     *
-     * @param Object [Object...] list of objects
-     * @param Int count
-     *
-     * @return RsoArray
-     */
-    public function initWithObjects_count()
-    {
-        $args  = func_get_args();
-        $count = end($args);
-        array_pop($args);
-        $this->array = array_slice($args, 0, $count);
         return $this;
     }
 
