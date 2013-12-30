@@ -197,24 +197,6 @@ class RsoArray extends \ArrayObject implements \Countable
     }
 
     /**
-     * Creates and returns an array that includes
-     * a given number of objects from a given
-     * PHP array.
-     *
-     * @param Object, [Object...] list of objects
-     * @param Int count
-     * 
-     * @return RsoArray
-     */
-    public static function arrayWithObjects_count()
-    {
-        $args  = func_get_args();
-        $count = end($args);
-        array_pop($args);
-        return new RsoArray(array_slice($args, 0, $count));
-    }
-
-    /**
      * Returns a new array that is a copy of the
      * receiving array with a given object added
      * to the end.
